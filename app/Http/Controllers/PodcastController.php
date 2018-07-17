@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Podcast;
 
 class PodcastController extends Controller
 {
@@ -14,7 +15,9 @@ class PodcastController extends Controller
   */
   public function index()
   {
-
+    // Get all Podcasts from the database
+    $podcasts = Podcast::all();
+    return view('podcasts.index', compact('podcasts'));
   }
 
   /**
@@ -24,7 +27,8 @@ class PodcastController extends Controller
   */
   public function create()
   {
-
+    // Show the create podcast view
+    return view('podcasts.create');
   }
 
   /**
@@ -35,7 +39,12 @@ class PodcastController extends Controller
   */
   public function store(Request $request)
   {
-
+    $this->validate($request, [
+      '' => 'required',
+      '' => 'required',
+      '' => 'required',
+      '' => 'required',
+    ]);
   }
 
   /**
@@ -44,9 +53,9 @@ class PodcastController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function show(IndivReview $review)
+  public function show(Podcast $podcast)
   {
-
+    return view('podcasts.show', compact('podcast'));
   }
 
   /**
@@ -55,9 +64,9 @@ class PodcastController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function edit(IndivReview $review)
+  public function edit(Podcast $podcast)
   {
-
+    return view('podcasts.edit', compact('podcast'));
   }
 
   /**
@@ -67,9 +76,17 @@ class PodcastController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function update(Request $request, IndivReview $review)
+  public function update(Request $request, Podcast $podcast)
   {
+    $this->validate($request, [
+      '' => 'required',
+      '' => 'required',
+      '' => 'required',
+      '' => 'required',
+    ]);
 
+    $podcast->update($request->all());
+    return back();
   }
 
   /**
@@ -78,9 +95,10 @@ class PodcastController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
-  public function destroy(IndivReview $review)
+  public function destroy(Podcast $podcast)
   {
-
+    $podcast->delete();
+    return back()->with('success', 'Podcast deleted successfully');
   }
-  
+
 }

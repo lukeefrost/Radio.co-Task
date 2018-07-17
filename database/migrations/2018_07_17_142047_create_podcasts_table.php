@@ -18,7 +18,7 @@ class CreatePodcastsTable extends Migration
             $table->string('url');
             $table->string('title');
             $table->string('description');
-            $table->integer('episode_number');
+            $table->increments('episode_number');
             $table->timestamps();
         });
     }
