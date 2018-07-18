@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('podcasts/index', 'PodcastController@index');
-Route::get('podcasts/create', 'PodcastControllerController@create');
-Route::post('podcasts/create', 'PodcastControllerController@store');
-Route::get('podcasts/edit/{podcast}', 'PodcastControllerController@edit');
-Route::post('podcasts/edit/{podcast}', 'PodcastControllerController@update');
-Route::get('podcasts/delete/{podcast}', 'PodcastControllerController@destroy');
-Route::get('podcasts/{podcast}', 'PodcastControllerController@show');
+Route::get('podcasts/create', 'PodcastController@create');
+Route::post('podcasts/create', 'PodcastController@store');
+Route::get('podcasts/edit/{podcast}', 'PodcastController@edit');
+Route::post('podcasts/edit/{podcast}', 'PodcastController@update');
+Route::get('podcasts/delete/{podcast}', 'PodcastController@destroy');
+Route::get('podcasts/show/{podcast}', 'PodcastController@show');

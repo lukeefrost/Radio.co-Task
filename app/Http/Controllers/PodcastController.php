@@ -40,17 +40,19 @@ class PodcastController extends Controller
   public function store(Request $request)
   {
     $this->validate($request, [
-      '' => 'required',
-      '' => 'required',
-      '' => 'required',
-      '' => 'required',
+      'url' => 'required',
+      'title' => 'required',
+      'description' => 'required'
     ]);
+    // store podcast details in the database
+    Podcast::create($request->all());
+    return back()->with('success', 'Review Created Successfully');
   }
 
   /**
   * Display the specified resource.
   *
-  * @param  int  $id
+  * @param  Podcast  $podcast
   * @return \Illuminate\Http\Response
   */
   public function show(Podcast $podcast)
@@ -61,7 +63,7 @@ class PodcastController extends Controller
   /**
   * Show the form for editing the specified resource.
   *
-  * @param  int  $id
+  * @param  Podcast  $podcast
   * @return \Illuminate\Http\Response
   */
   public function edit(Podcast $podcast)
@@ -73,26 +75,25 @@ class PodcastController extends Controller
   * Update the specified resource in storage.
   *
   * @param  \Illuminate\Http\Request  $request
-  * @param  int  $id
+  * @param  Podcast  $podcast
   * @return \Illuminate\Http\Response
   */
   public function update(Request $request, Podcast $podcast)
   {
     $this->validate($request, [
-      '' => 'required',
-      '' => 'required',
-      '' => 'required',
-      '' => 'required',
+      'url' => 'required',
+      'title' => 'required',
+      'description' => 'required'
     ]);
 
     $podcast->update($request->all());
-    return back();
+    return back()->with('success', 'Podcast Details updated successfully');
   }
 
   /**
   * Remove the specified resource from storage.
   *
-  * @param  int  $id
+  * @param  Podcast  $podcast
   * @return \Illuminate\Http\Response
   */
   public function destroy(Podcast $podcast)
