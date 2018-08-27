@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('upload', function() {
+    $files = Storage::disk('spaces')->files('uploads');
+
+    return view('upload', compact('files'));
+});
+
+Route::post('upload', function() {
+    Storage::disk('spaces')->putFile('uploads', request()->file, 'public');
+
+    return redirect()->back();
+});
+
 Route::get('podcasts/index', 'PodcastController@index');
 Route::get('podcasts/create', 'PodcastController@create');
 Route::post('podcasts/create', 'PodcastController@store');
